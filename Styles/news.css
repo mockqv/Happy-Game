@@ -1,0 +1,61 @@
+/* Importing fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter&family=Montserrat:wght@400;700&family=Pixelify+Sans:wght@400..700&display=swap');
+
+/* Color variables */
+:root {
+    --color1: #582259;
+    --color2: #f18df2;
+    --color3: #031626;
+    --color4: #049dd9;
+    --color5: #05c7f2;
+    --color6: #ffffff;
+    --color7: #02b770;
+}
+
+@keyframes blink {
+    0%, 100% { color: var(--color4); transform: scale(0.8); }
+    50% { color: var(--color6); transform: scale(1); }
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+body {
+    flex: 1;
+}
+
+main {
+    flex: 1;
+}
+
+.span-title-header a span {
+    display: inline-block;
+    animation: blink 1.2s infinite;
+}
+
+.span-title-header a {
+    font-family: "Pixelify Sans", sans-serif;
+    font-size: 2rem;
+    color: var(--color3);
+    text-decoration: none;
+}
+
+p {
+    font-family: "Montserrat", sans-serif;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: justify;
+}
+
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+

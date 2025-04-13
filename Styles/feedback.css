@@ -1,0 +1,28 @@
+:root {
+    --color1: #222831;
+    --color2: #31363F;
+    --color3: #76ABAE;
+    --color4: #EEEEEE;
+    --color5: #0087a8;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--color4);
+    color: var(--color1);
+  }
+  
+  .span-title-header span {
+    font-family: 'Pixelify Sans', cursive;
+    font-size: 24px;
+    margin-right: 1px;
+  }
+  
+  footer {
+    font-size: 14px;
+  }
+  
+  footer .footer-links a:hover {
+    text-decoration: underline;
+  }
+  
