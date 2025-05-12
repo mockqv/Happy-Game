@@ -1,42 +1,57 @@
+/* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Montserrat:wght@100..900&family=Pixelify+Sans:wght@400..700&display=swap');
 
+/* CSS Variables (Color Palette) */
 :root {
-    --color1: #582259;
-    --color2: #f18df2;
-    --color3: #031626;
-    --color4: #049dd9;
-    --color5: #05c7f2;
-    --color6: #ffffff;
-    --color7: #02b770;
+    --color1: #582259; /* Dark Purple */
+    --color2: #f18df2; /* Light Pink/Purple */
+    --color3: #031626; /* Very Dark Blue/Black */
+    --color4: #049dd9; /* Bright Blue */
+    --color5: #05c7f2; /* Cyan Blue */
+    --color6: #ffffff; /* White */
+    --color7: #02b770; /* Green */
+    --text-light: #f8f9fa; /* Bootstrap light background color for general use */
+    --text-dark: #212529; /* Bootstrap dark text color */
 }
 
-.span-title-header span:nth-child(1) { animation-delay: 0s; }
-.span-title-header span:nth-child(2) { animation-delay: 0.2s; }
-.span-title-header span:nth-child(3) { animation-delay: 0.4s; }
-.span-title-header span:nth-child(4) { animation-delay: 0.6s; }
-.span-title-header span:nth-child(5) { animation-delay: 0.8s; }
-.span-title-header span:nth-child(6) { animation-delay: 1s; }
-.span-title-header span:nth-child(7) { animation-delay: 1.2s; }
-.span-title-header span:nth-child(8) { animation-delay: 1.4s; }
-.span-title-header span:nth-child(9) { animation-delay: 1.6s; }
-.span-title-header span:nth-child(10) { animation-delay: 1.8s; }
+/* Keyframe Animation for Header Title */
+@keyframes blink {
+    0%, 100% { color: var(--color4); transform: scale(0.9); opacity: 0.8; }
+    50% { color: var(--color6); transform: scale(1.1); opacity: 1; }
+}
 
+/* Animation Delays for Header Title Spans */
+.span-title-header span:nth-child(1) { animation-delay: 0s;}
+.span-title-header span:nth-child(2) { animation-delay: 0.1s;}
+.span-title-header span:nth-child(3) { animation-delay: 0.2s;}
+.span-title-header span:nth-child(4) { animation-delay: 0.3s;}
+.span-title-header span:nth-child(5) { animation-delay: 0.4s;}
+.span-title-header span:nth-child(6) { animation-delay: 0.5s;}
+.span-title-header span:nth-child(7) { animation-delay: 0.6s;}
+.span-title-header span:nth-child(8) { animation-delay: 0.7s;}
+.span-title-header span:nth-child(9) { animation-delay: 0.8s;}
+.span-title-header span:nth-child(10) { animation-delay: 0.9s;}
+
+/* Universal Box Sizing */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* HTML and Body Defaults */
 html, body {
-    height: 100%;
-    width: 100%;
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    background-color: #f4f4f4;
+    min-height: 100vh; /* Ensure full viewport height */
     display: flex;
     flex-direction: column;
+    font-family: 'Montserrat', sans-serif; /* Consistent font */
+    line-height: 1.6;
+    background-color: var(--text-light); /* Light background color */
+    color: var(--text-dark); /* Default text color */
+    padding-top: 10vh; /* Space for fixed header */
 }
 
+/* Header */
 header {
     background-color: var(--color4);
     display: flex;
@@ -44,127 +59,248 @@ header {
     align-items: center;
     height: 10vh;
     padding: 0 2vw;
+    position: fixed; /* Make header sticky */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure header is above other content */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
 }
 
+/* Header Title Link */
 .span-title-header a {
     font-family: "Pixelify Sans", sans-serif;
-    font-size: 2em;
+    font-size: 2.8em; /* Consistent with home page */
     color: var(--color3);
     text-decoration: none;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .span-title-header a span {
     display: inline-block;
-    animation: blink 1.2s infinite;
+    animation: blink 1.5s infinite; /* Consistent animation */
 }
 
-@keyframes blink {
-    0%, 100% { color: var(--color4); transform: scale(0.8); }
-    50% { color: #ffffff; transform: scale(1); }
+/* Navigation Links Container */
+.div-link {
+    display: flex;
+    gap: 2.5vw; /* Consistent with home page */
 }
 
+/* Navigation Links */
 .div-link a {
-    color: var(--color6);
+    color: var(--color6); /* White links in header */
     text-decoration: none;
-    margin: 0 10px;
     font-family: "Montserrat", sans-serif;
-    font-size: 20px;
+    font-size: 1.1em; /* Consistent font size */
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transitions */
 }
 
+.div-link a:hover {
+    color: var(--color3); /* Dark blue/black on hover */
+    transform: translateY(-2px); /* Slight lift effect */
+}
+
+/* Main Content Area */
 main {
-    flex: 1;
-    padding: 20px;
+    flex: 1; /* Allows main content to take available space */
+    padding: 40px 20px; /* Adjusted padding for better spacing */
     text-align: center;
+    max-width: 1200px; /* Max width for content */
+    margin: 0 auto; /* Center main content */
+    width: 100%; /* Ensure it uses full width up to max-width */
 }
 
+main h2 {
+    font-size: 2.2em;
+    color: var(--color1); /* Dark Purple for main title */
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+main p {
+    font-size: 1.1em;
+    color: var(--text-dark);
+    margin-bottom: 30px;
+}
+
+/* Table Styling */
 table {
     width: 100%;
-    max-width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    margin: 50px 0;
+    border-collapse: separate; /* Use separate borders for custom styling */
+    border-spacing: 0; /* Remove default spacing */
+    background-color: var(--color6); /* White background for table */
+    margin: 50px auto; /* Center table and add vertical margin */
+    border-radius: 10px; /* Rounded corners for the table */
+    overflow: hidden; /* Ensures rounded corners clip content */
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
-    padding: 15px;
+/* Table Header */
+.table-header-custom th {
+    background-color: var(--color4); /* Bright Blue background */
+    color: var(--color6); /* White text */
+    padding: 15px 20px; /* Adjusted padding */
     text-align: left;
+    font-weight: 600;
+    font-size: 1.1em;
+    text-transform: uppercase;
 }
 
-th {
-    background-color: #f2f2f2;
+/* Table Body Cells */
+table td {
+    padding: 15px 20px; /* Consistent padding */
+    text-align: left;
+    border-bottom: 1px solid var(--text-light); /* Subtle border between rows */
+    color: var(--color3); /* Dark text for table cells */
+    font-size: 0.95em;
 }
 
+/* Striped Rows (Bootstrap class) */
+table .table-striped tbody tr:nth-of-type(odd) {
+    background-color: rgba(0, 0, 0, 0.03); /* Lighter stripe effect */
+}
+
+/* Hover Effect for Table Rows */
+table tbody tr {
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+table tbody tr:hover {
+    background-color: var(--color2); /* Light Pink/Purple on hover */
+    transform: translateY(-3px); /* Subtle lift effect on hover */
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1); /* Shadow on hover */
+}
+
+/* Remove last row bottom border */
+table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Footer */
 footer {
     background-color: var(--color4);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 5vh;
-    padding: 0 2vw;
-    width: 100%;
-    position: relative;
-    bottom: 0;
+    min-height: 7vh; /* Use min-height for flexibility */
+    padding: 1.5vh 2vw; /* Adjusted padding */
+    color: var(--color6); /* White text color */
+    font-size: 0.9em;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    margin-top: auto; /* Pushes footer to the bottom */
+}
+
+.copyright {
+    font-family: "Montserrat", sans-serif;
+    font-size: 0.9em;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2vw;
 }
 
 .footer-links a {
-    color: var(--color6);
+    color: var(--color6); /* White links in footer */
     text-decoration: none;
-    margin-left: 10px;
+    font-family: "Montserrat", sans-serif;
+    font-size: 1em;
+    transition: color 0.3s ease-in-out;
+}
+
+.footer-links a:hover {
+    color: var(--color3); /* Dark blue/black on hover */
+    transform: none; /* Remove lift effect */
 }
 
 /* Responsividade */
 @media (max-width: 1024px) {
     .span-title-header a {
-        font-size: 1.8em;
+        font-size: 2.2em;
     }
     .div-link a {
-        font-size: 18px;
+        font-size: 1em;
     }
-    th, td {
-        padding: 12px;
+    main {
+        padding: 30px 15px;
+    }
+    main h2 {
+        font-size: 2em;
+    }
+    table {
+        font-size: 0.9em;
+    }
+    .table-header-custom th, table td {
+        padding: 12px 15px;
     }
 }
 
 @media (max-width: 768px) {
+    body {
+        padding-top: 15vh; /* Adjust for potentially larger header on smaller screens */
+    }
     header {
         flex-direction: column;
         height: auto;
-        padding: 10px;
-    }
-    .span-title-header a {
-        font-size: 1.6em;
+        padding: 1.5vh 2vw;
     }
     .div-link {
-        display: flex;
         flex-direction: column;
+        gap: 0.8em;
         align-items: center;
+        margin-top: 1em;
     }
-    .div-link a {
-        margin: 5px 0;
+    .span-title-header a {
+        font-size: 2em;
+    }
+    main {
+        padding: 20px 10px;
+    }
+    main h2 {
+        font-size: 1.8em;
+    }
+    main p {
+        font-size: 1em;
     }
     table {
-        font-size: 14px;
+        font-size: 0.8em;
+        /* Table responsive already handled by Bootstrap's .table-responsive */
+    }
+    .table-header-custom th, table td {
+        padding: 10px 12px;
+    }
+    footer {
+        flex-direction: column;
+        min-height: auto;
+        padding: 1.5vh 2vw;
+        text-align: center;
+    }
+    .footer-links {
+        flex-direction: column;
+        gap: 0.8em;
+        margin-top: 1em;
+    }
+    .copyright {
+        margin-bottom: 0.5em;
     }
 }
 
 @media (max-width: 480px) {
     .span-title-header a {
-        font-size: 1.4em;
+        font-size: 1.6em;
     }
     .div-link a {
-        font-size: 16px;
+        font-size: 0.9em;
     }
-    th, td {
-        padding: 8px;
+    main h2 {
+        font-size: 1.6em;
     }
-    footer {
-        flex-direction: column;
-        text-align: center;
-        height: auto;
-        padding: 10px;
+    main p {
+        font-size: 0.9em;
+    }
+    .table-header-custom th, table td {
+        padding: 8px 10px;
     }
 }

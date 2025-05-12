@@ -26,7 +26,6 @@
   }
 }
 
-/* Reset e base */
 * {
   margin: 0;
   padding: 0;
@@ -42,7 +41,6 @@ body {
   color: var(--color3);
 }
 
-/* Header */
 header {
   font-family: 'Pixelify Sans', sans-serif;
   background-color: var(--color4);
@@ -76,12 +74,10 @@ header {
   font-family: 'Montserrat', sans-serif;
 }
 
-/* Espaço do header */
 .header-space {
   height: 60px;
 }
 
-/* Conteúdo */
 .content {
   flex: 1;
   display: flex;
@@ -123,7 +119,6 @@ header {
   justify-content: center;
 }
 
-/* Formulário */
 input, textarea {
   width: 100%;
   padding: 10px;
@@ -150,7 +145,6 @@ button:hover {
   background-color: var(--color5);
 }
 
-/* Mensagem de sucesso */
 #enviado {
   display: none;
   margin-top: 20px;
@@ -164,7 +158,6 @@ button:hover {
   display: block;
 }
 
-/* Footer */
 footer {
   background-color: var(--color4);
   color: var(--color6);
@@ -182,7 +175,6 @@ footer {
   margin-left: 10px;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
