@@ -1,133 +1,159 @@
-/* Import Fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap');
 
-/* CSS Variables (Color Palette) */
 :root {
-    --color1: #582259; /* Dark Purple */
-    --color2: #f18df2; /* Light Pink/Purple */
-    --color3: #031626; /* Very Dark Blue/Black */
-    --color4: #049dd9; /* Bright Blue */
-    --color5: #05c7f2; /* Cyan Blue */
-    --color6: #ffffff; /* White */
-    --color7: #02b770; /* Green */
-    --text-light: #f8f9fa; /* Bootstrap light background color for general use */
-    --text-dark: #212529; /* Bootstrap dark text color */
+    --color1: #582259;
+    --color2: #f18df2;
+    --color3: #031626;
+    --color4: #049dd9;
+    --color5: #05c7f2;
+    --color6: #ffffff;
+    --color7: #02b770;
+    --text-light: #f8f9fa;
+    --text-dark: #212529;
 }
 
-/* Keyframe Animation for Header Title */
 @keyframes blink {
-    0%, 100% { color: var(--color4); transform: scale(0.9); opacity: 0.8; }
-    50% { color: var(--color6); transform: scale(1.1); opacity: 1; }
+
+    0%,
+    100% {
+        color: var(--color4);
+        transform: scale(0.9);
+        opacity: 0.8;
+    }
+
+    50% {
+        color: var(--color6);
+        transform: scale(1.1);
+        opacity: 1;
+    }
 }
 
-/* Animation Delays for Header Title Spans */
-.span-title-header span:nth-child(1) { animation-delay: 0s;}
-.span-title-header span:nth-child(2) { animation-delay: 0.1s;}
-.span-title-header span:nth-child(3) { animation-delay: 0.2s;}
-.span-title-header span:nth-child(4) { animation-delay: 0.3s;}
-.span-title-header span:nth-child(5) { animation-delay: 0.4s;}
-.span-title-header span:nth-child(6) { animation-delay: 0.5s;}
-.span-title-header span:nth-child(7) { animation-delay: 0.6s;}
-.span-title-header span:nth-child(8) { animation-delay: 0.7s;}
-.span-title-header span:nth-child(9) { animation-delay: 0.8s;}
-.span-title-header span:nth-child(10) { animation-delay: 0.9s;}
+.span-title-header span:nth-child(1) {
+    animation-delay: 0s;
+}
 
-/* Universal Box Sizing */
+.span-title-header span:nth-child(2) {
+    animation-delay: 0.1s;
+}
+
+.span-title-header span:nth-child(3) {
+    animation-delay: 0.2s;
+}
+
+.span-title-header span:nth-child(4) {
+    animation-delay: 0.3s;
+}
+
+.span-title-header span:nth-child(5) {
+    animation-delay: 0.4s;
+}
+
+.span-title-header span:nth-child(6) {
+    animation-delay: 0.5s;
+}
+
+.span-title-header span:nth-child(7) {
+    animation-delay: 0.6s;
+}
+
+.span-title-header span:nth-child(8) {
+    animation-delay: 0.7s;
+}
+
+.span-title-header span:nth-child(9) {
+    animation-delay: 0.8s;
+}
+
+.span-title-header span:nth-child(10) {
+    animation-delay: 0.9s;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* Body Styles */
 body {
-    font-family: 'Montserrat', sans-serif; /* Default font for body */
-    color: var(--text-dark); /* Default text color */
-    background-color: var(--text-light); /* Light background for the page */
-    padding-top: 10vh; /* Space for fixed header */
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--text-light);
+    padding-top: 10vh;
 }
 
-/* Header */
 header {
-    background-color: var(--color4); /* Bright Blue */
+    background-color: var(--color4);
     display: flex;
     justify-content: space-between;
     align-items: center;
     height: 10vh;
     padding: 0 2vw;
-    position: fixed; /* Make header sticky */
+    position: fixed;
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; /* Ensure header is above other content */
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Navigation Links Container */
 .div-link {
     display: flex;
     gap: 2.5vw;
 }
 
-/* General Anchor Tag Styles */
 a {
-    color: var(--color3); /* Very Dark Blue/Black */
+    color: var(--color3);
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
-    font-size: 1.1em; /* Slightly adjusted font size */
-    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out; /* Smooth transitions */
+    font-size: 1.1em;
+    transition: color 0.3s ease-in-out, transform 0.3s ease-in-out;
 }
 
-/* Hover Effect for general links (excluding specific ones) */
 a:hover:not(#championships-link, #news-link, .span-title-header a, .footer-links a) {
-    color: var(--color5); /* Cyan Blue on hover */
-    transform: translateY(-2px); /* Slight lift effect */
+    color: var(--color5);
+    transform: translateY(-2px);
 }
 
-/* Specific Link Styles for Championship and News */
 #championships-link {
-    color: var(--color2); /* Light Pink/Purple */
-    font-weight: 600; /* Make them slightly bolder */
+    color: var(--color2);
+    font-weight: 600;
 }
 
 #news-link {
-    color: var(--color1); /* Dark Purple */
-    font-weight: 600; /* Make them slightly bolder */
+    color: var(--color1);
+    font-weight: 600;
 }
 
-/* Hover Effects for Championship and News links */
 #championships-link:hover,
 #news-link:hover {
-    opacity: 0.9; /* Slight transparency */
-    transform: scale(1.1); /* More prominent scale effect on these */
+    opacity: 0.9;
+    transform: scale(1.1);
 }
 
-/* Header Title Styles */
 .span-title-header a {
     font-family: "Pixelify Sans", sans-serif;
-    font-size: 2.8em; /* Adjusted font size */
-    color: var(--color3); /* Very Dark Blue/Black */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* Subtle text shadow */
+    font-size: 2.8em;
+    color: var(--color3);
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .span-title-header a span {
     display: inline-block;
-    animation: blink 1.5s infinite; /* Adjusted animation duration */
+    animation: blink 1.5s infinite;
 }
 
-/* Home Section (First Section - Preview) */
 .home-section {
     display: flex;
-    background: url(../Assets/Img/background-section.jpg) black; /* Image background */
+    background: url(../Assets/Img/background-section.jpg) black;
     background-size: cover;
-    background-position: center; /* Ensure image is centered */
-    background-attachment: fixed; /* Parallax effect */
+    background-position: center;
+    background-attachment: fixed;
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    padding: 4vw 2vw; /* More vertical padding */
-    min-height: 90vh; /* Use min-height to allow content to expand */
-    position: relative; /* For the overlay */
+    padding: 4vw 2vw;
+    min-height: 90vh;
+    position: relative;
 }
 
 .home-section::before {
@@ -137,23 +163,22 @@ a:hover:not(#championships-link, #news-link, .span-title-header a, .footer-links
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Slightly darker overlay for text readability */
+    background-color: rgba(0, 0, 0, 0.4);
     z-index: 1;
 }
 
-/* Home Text Content */
 .home-text {
-    color: var(--color6); /* White text */
-    max-width: 35vw; /* Adjusted max-width for better line length */
+    color: var(--color6);
+    max-width: 35vw;
     font-family: "Montserrat", sans-serif;
-    background-color: rgba(2, 183, 112, 0.9); /* Semi-transparent green background */
-    padding: 20px; /* More padding inside the box */
-    border-radius: 15px; /* Slightly less rounded corners */
-    align-self: center; /* Center the text box if desired, or keep self-start */
-    text-align: center; /* Center text inside the box */
-    position: relative; /* Ensure it's above the overlay */
+    background-color: rgba(2, 183, 112, 0.9);
+    padding: 20px;
+    border-radius: 15px;
+    align-self: center;
+    text-align: center;
+    position: relative;
     z-index: 2;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* More prominent shadow */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
 .home-text h1 {
@@ -165,79 +190,95 @@ a:hover:not(#championships-link, #news-link, .span-title-header a, .footer-links
 .home-text span {
     font-size: 1.1em;
     line-height: 1.6;
-    /* text-align: justify; - Removed from here and applied to content-text p */
 }
 
-/* News and Championships Sections */
 .news-section,
-.championships-section {
+.championships-section,
+.esg-section {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 5em 2em; /* Consistent and generous padding */
-    gap: 4vh; /* Gap between elements inside section */
-    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1); /* Inner shadow for separation */
+    padding: 5em 2em;
+    gap: 4vh;
+    box-shadow: inset 0 5px 10px rgba(0, 0, 0, 0.1);
 }
 
 .news-section {
-    background-color: var(--color2); /* Light Pink/Purple */
-    color: var(--color3); /* Text color for news section */
+    background-color: var(--color2);
+    color: var(--color3);
 }
 
 .championships-section {
-    background-color: var(--color1); /* Dark Purple */
-    color: var(--color6); /* White text color for championship section */
+    background-color: var(--color1);
+    color: var(--color6);
 }
 
-.championships-section h2, .championships-section p {
-    color: var(--color6); /* Ensure text color is white for championships */
+.championships-section h2,
+.championships-section p {
+    color: var(--color6);
 }
 
-.news-section h2, .news-section p {
-    color: var(--color3); /* Ensure text color is dark for news */
+.news-section h2,
+.news-section p {
+    color: var(--color3);
 }
 
-/* Content Text within Sections */
 .content-text {
-    max-width: 60vw; /* Adjusted max-width for readability */
-    padding: 0 15px; /* Add horizontal padding */
-    text-align: left; /* Default text alignment for content paragraphs */
+    max-width: 60vw;
+    padding: 0 15px;
+    text-align: left;
 }
 
 .content-text h2 {
     font-size: 1.8em;
     margin-bottom: 1em;
-    color: inherit; /* Inherit color from section */
+    color: inherit;
 }
 
 .content-text p {
     font-size: 1em;
     line-height: 1.7;
     margin-bottom: 1.5em;
-    text-align: justify; /* Justify paragraph text */
-    color: inherit; /* Inherit color from section */
+    text-align: justify;
+    color: inherit;
 }
 
-/* Section Titles (h1 with links) */
-.news-section h1, .championships-section h1 {
+.news-section h1,
+.championships-section h1 {
     font-size: 2.5em;
     margin-bottom: 0.5em;
     font-family: "Pixelify Sans", sans-serif;
     text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-/* Footer */
+
+.esg-title {
+    font-size: 2.5rem;
+    color: #198754;
+    font-weight: bold;
+}
+
+.esg-section .content-text h2 {
+    font-size: 1.75rem;
+    color: #146c43;
+}
+
+.esg-section .content-text p {
+    font-size: 1.1rem;
+    color: #2b2b2b;
+}
+
 footer {
-    background-color: var(--color4); /* Bright Blue */
+    background-color: var(--color4);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    min-height: 7vh; /* Use min-height for flexibility */
-    padding: 1.5vh 2vw; /* Adjusted padding */
-    color: var(--color6); /* White text color */
+    min-height: 7vh;
+    padding: 1.5vh 2vw;
+    color: var(--color6);
     font-size: 0.9em;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
 }
 
 .copyright {
@@ -247,11 +288,11 @@ footer {
 
 .footer-links {
     display: flex;
-    gap: 2vw; /* Adjusted gap */
+    gap: 2vw;
 }
 
 .footer-links a {
-    color: var(--color6); /* White links in footer */
+    color: var(--color6);
     text-decoration: none;
     font-family: "Montserrat", sans-serif;
     font-size: 1em;
@@ -259,16 +300,15 @@ footer {
 }
 
 .footer-links a:hover {
-    color: var(--color3); /* Dark blue/black on hover */
-    transform: none; /* Remove lift effect */
+    color: var(--color3);
+    transform: none;
 }
 
-
-/* Media Queries */
 @media (max-width: 1200px) {
     .home-text {
         max-width: 45vw;
     }
+
     .content-text {
         max-width: 70vw;
     }
@@ -281,100 +321,56 @@ footer {
         flex-direction: column;
         gap: 1vh;
     }
+
     .div-link {
         gap: 1.5em;
-        flex-wrap: wrap; /* Allow links to wrap */
+        flex-wrap: wrap;
         justify-content: center;
     }
+
     .span-title-header a {
         font-size: 2.2em;
     }
+
     body {
-        padding-top: 15vh; /* Adjust padding top for new header height */
+        padding-top: 15vh;
     }
+
     .home-text {
         max-width: 60vw;
         font-size: 0.9em;
         padding: 15px;
     }
+
     .home-text h1 {
         font-size: 1.8em;
     }
+
     .content-text {
         max-width: 80vw;
     }
-    .news-section h1, .championships-section h1 {
+
+    .news-section h1,
+    .championships-section h1 {
         font-size: 2em;
     }
 }
 
 @media (max-width: 768px) {
     body {
-        padding-top: 15vh; /* Adjust for potentially larger header on smaller screens */
+        padding-top: 15vh;
     }
-    header {
-        flex-direction: column;
-        height: auto;
-        padding: 1.5vh 2vw;
-    }
-    .div-link {
-        flex-direction: column;
-        gap: 1em;
-        align-items: center;
-    }
-    .span-title-header a {
-        font-size: 2em;
-    }
+
     .home-text {
-        max-width: 85vw;
+        max-width: 80vw;
         font-size: 0.85em;
-        padding: 12px;
-        text-align: center;
     }
-    .home-text h1 {
-        font-size: 1.6em;
+
+    .span-title-header a {
+        font-size: 1.8em;
     }
+
     .content-text {
         max-width: 90vw;
-        padding: 0 10px;
-    }
-    .news-section h1, .championships-section h1 {
-        font-size: 1.8em;
-    }
-    footer {
-        flex-direction: column;
-        min-height: auto;
-        padding: 1.5vh 2vw;
-        text-align: center;
-    }
-    .footer-links {
-        flex-direction: column;
-        gap: 0.8em;
-        margin-top: 1em;
-    }
-    .copyright {
-        margin-bottom: 0.5em;
-    }
-}
-
-@media (max-width: 480px) {
-    .span-title-header a {
-        font-size: 1.8em;
-    }
-    a {
-        font-size: 1em;
-    }
-    .home-text {
-        font-size: 0.8em;
-        padding: 10px;
-    }
-    .home-text h1 {
-        font-size: 1.4em;
-    }
-    .news-section h1, .championships-section h1 {
-        font-size: 1.6em;
-    }
-    .content-text p {
-        font-size: 0.9em;
     }
 }
