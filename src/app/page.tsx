@@ -1,103 +1,73 @@
-import Image from "next/image";
+import { ArrowRightIcon, UsersIcon, NewspaperIcon, TrophyIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+
+// Componente para os Cartões de Destaque, agora com um design mais refinado
+const FeatureCard = ({ icon: Icon, title, children, href }: { icon: React.ElementType, title: string, children: React.ReactNode, href: string }) => (
+  <Link 
+    href={href} 
+    className="group relative block p-8 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 transition-all duration-300 shadow-sm hover:shadow-lg hover:-translate-y-1"
+  >
+    {/* Efeito de brilho no hover */}
+    <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-sky-500 transition-all duration-300"></div>
+
+    <div className="relative">
+      <div className="bg-sky-100 dark:bg-sky-900/50 inline-block p-3 rounded-xl mb-6 border border-sky-200 dark:border-sky-800">
+        {/* Ícone com tamanho corrigido */}
+        <Icon className="h-5 w-5 text-sky-600 dark:text-sky-400" />
+      </div>
+      <h3 className="text-xl font-bold mb-2 text-slate-900 dark:text-slate-100">{title}</h3>
+      <p className="text-slate-600 dark:text-slate-400 mb-4">{children}</p>
+      <span className="font-semibold text-sky-600 dark:text-sky-400 flex items-center">
+        Saber mais <ArrowRightIcon className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+      </span>
+    </div>
+  </Link>
+);
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+    <div className="w-full">
+      {/* Secção Hero com gradiente de fundo subtil */}
+      <section className="relative text-center py-20 md:py-32 overflow-hidden bg-gradient-to-b from-slate-50 to-white dark:from-slate-900 dark:to-slate-950">
+        <div className="container mx-auto px-4 relative z-10">
+          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter text-slate-900 dark:text-slate-50 mb-4">
+            Seu Universo Gamer
+          </h1>
+          <p className="text-lg md:text-xl text-slate-500 dark:text-slate-400 max-w-2xl mx-auto mb-8">
+            Todas as notícias, competições e perfis de jogadores que você ama, num só lugar. Mergulhe de cabeça no mundo dos eSports.
+          </p>
+          <Link 
+            href="/noticias" 
+            className="inline-flex items-center bg-sky-600 text-white font-bold py-3 px-8 rounded-full hover:bg-sky-700 transition-all duration-300 hover:scale-105 shadow-xl hover:shadow-sky-500/20"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            Explorar Novidades
+            <ArrowRightIcon className="h-5 w-5 ml-2" />
+          </Link>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </section>
+
+      {/* Secção de Destaques */}
+      <section className="py-20 md:py-24 bg-white dark:bg-slate-950">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold tracking-tight text-slate-900 dark:text-slate-50">Tudo o que Você Precisa</h2>
+            <p className="mt-3 text-lg text-slate-500 dark:text-slate-400 max-w-xl mx-auto">
+              Explore as nossas principais secções e mantenha-se sempre atualizado.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <FeatureCard title="Últimas Notícias" icon={NewspaperIcon} href="/noticias">
+              Fique por dentro das últimas atualizações, patches e eventos do cenário competitivo.
+            </FeatureCard>
+            <FeatureCard title="Competições" icon={TrophyIcon} href="/competicoes">
+              Acompanhe os resultados dos torneios, veja os calendários e torça pelas suas equipas favoritas.
+            </FeatureCard>
+            <FeatureCard title="Perfis de Jogadores" icon={UsersIcon} href="/jogadores">
+              Conheça as estrelas do eSports. Veja estatísticas, biografias e os melhores momentos.
+            </FeatureCard>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }
