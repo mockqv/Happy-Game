@@ -1,33 +1,22 @@
-"use client";
+"use client"
 
-import { useTheme } from 'next-themes';
-import { useEffect, useState } from 'react';
-import { SunIcon, MoonIcon } from '@heroicons/react/24/solid';
+import * as React from "react"
+import { Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
+import { Button } from "@/components/ui/button"
 
-export default function ToggleDarkMode() {
-  const [mounted, setMounted] = useState(false);
-  const { theme, setTheme } = useTheme();
-
-  useEffect(() => setMounted(true), []);
-
-  if (!mounted) {
-    return <div className="h-8 w-8" />;
-  }
-
-  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+export function ThemeToggle() {
+  const { setTheme, theme } = useTheme()
 
   return (
-    <button
-      aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
-      type="button"
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 dark:focus-visible:ring-offset-slate-900"
-      onClick={() => setTheme(isDark ? 'light' : 'dark')}
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={() => setTheme(theme === "light" ? "dark" : "light")}
     >
-      {isDark ? (
-        <SunIcon className="h-6 w-6 text-yellow-400" />
-      ) : (
-        <MoonIcon className="h-6 w-6 text-gray-800" />
-      )}
-    </button>
-  );
+      <Sun className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+      <Moon className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+      <span className="sr-only">Toggle theme</span>
+    </Button>
+  )
 }

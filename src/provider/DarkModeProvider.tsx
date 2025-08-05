@@ -1,22 +1,9 @@
-"use client";
+"use client"
 
-import { ThemeProvider } from 'next-themes';
-import { useEffect, useState } from 'react';
+import { ThemeProvider as NextThemesProvider } from "next-themes"
+//@ts-ignore
+import { type ThemeProviderProps } from "next-themes/dist/types"
 
-export default function DarkModeProvider({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  if (!mounted) {
-    return <>{children}</>;
-  }
-
-  return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-      {children}
-    </ThemeProvider>
-  );
+export default function DarkModeProvider({ children, ...props }: ThemeProviderProps) {
+  return <NextThemesProvider {...props}>{children}</NextThemesProvider>
 }

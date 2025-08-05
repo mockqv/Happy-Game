@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import ToggleDarkMode from './ToggleDarkMode';
+import { ThemeToggle } from './ToggleDarkMode';
+
 
 const MenuIcon = ({ className }: { className: string }) => (
   <svg className={className} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -55,7 +56,7 @@ export default function Header() {
               <DoorIcon className="w-6 h-6" />
             </Link>
           </li>
-          <li><ToggleDarkMode/></li>
+          <li><ThemeToggle/></li>
         </ul>
 
         {/* NAVEGAÇÃO MOBILE */}
@@ -64,7 +65,7 @@ export default function Header() {
           <Link href="/sign-in" aria-label="Entrar" className="text-sky-600 dark:text-sky-400 p-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">
             <DoorIcon className="w-7 h-7" />
           </Link>
-          <ToggleDarkMode/>
+          <ThemeToggle/>
           <button onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Abrir menu" className="text-gray-800 dark:text-gray-200 p-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">
             {isMenuOpen ? <CloseIcon className="w-7 h-7" /> : <MenuIcon className="w-7 h-7" />}
           </button>

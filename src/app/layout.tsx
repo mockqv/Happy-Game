@@ -20,8 +20,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br" suppressHydrationWarning>
-      <body className={`${inter.className} bg-white dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300 flex flex-col min-h-screen`}>
-        <DarkModeProvider>
+      <body className={`${inter.className} bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-200 transition-colors duration-300 flex flex-col min-h-screen`}>
+        <DarkModeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <AuthProvider>
             <Header />
             <main className="flex-grow container mx-auto px-4 py-8">

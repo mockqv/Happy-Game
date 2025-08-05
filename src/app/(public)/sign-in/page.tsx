@@ -4,7 +4,6 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import loginWithEmailAndPassword from '@/functions/sign-in';
-import Cookies from 'js-cookie';
 
 type User = {
     email: string;
@@ -45,12 +44,7 @@ export default function SignInPage() {
 
     try {
       await loginWithEmailAndPassword(user);
-      
-      // Cria o cookie 'token' para o middleware
-      Cookies.set('token', 'true', { expires: 1 });
-      
       router.push('/dashboard');
-
     } catch (err: any) {
       console.error("Erro de autenticação:", err);
       switch (err.code) {
@@ -75,7 +69,6 @@ export default function SignInPage() {
     <div className="flex min-h-screen flex-col items-center justify-center bg-slate-900 p-4">
       <div className="w-full max-w-md">
         <div className="rounded-xl bg-slate-800 p-8 shadow-2xl shadow-slate-950/50">
-          
           <div className="flex flex-col items-center gap-4 mb-8">
             <div className="bg-sky-500/20 p-3 rounded-full">
               <LockIcon className="w-6 h-6 text-sky-400" />
@@ -87,70 +80,24 @@ export default function SignInPage() {
               Bem-vindo de volta ao seu universo gamer.
             </p>
           </div>
-
           <form onSubmit={handleSubmit} noValidate>
             <div className="mb-4">
-              <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={user.email}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-md bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                placeholder="voce@exemplo.com"
-                required
-                disabled={isLoading}
-              />
+              <label htmlFor="email" className="block text-gray-300 text-sm font-bold mb-2">Email</label>
+              <input type="email" id="email" name="email" value={user.email} onChange={handleChange} className="w-full px-4 py-3 rounded-md bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition" placeholder="voce@exemplo.com" required disabled={isLoading} />
             </div>
-
             <div className="mb-6">
-              <label htmlFor="password" className="block text-gray-300 text-sm font-bold mb-2">
-                Senha
-              </label>
-              <input
-                type="password"
-                id="password"
-                name="password"
-                value={user.password}
-                onChange={handleChange}
-                className="w-full px-4 py-3 rounded-md bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition"
-                placeholder="••••••••"
-                required
-                disabled={isLoading}
-              />
+              <label htmlFor="password" className="block text-gray-300 text-sm font-bold mb-2">Senha</label>
+              <input type="password" id="password" name="password" value={user.password} onChange={handleChange} className="w-full px-4 py-3 rounded-md bg-slate-700 text-white border border-slate-600 focus:outline-none focus:ring-2 focus:ring-sky-500 transition" placeholder="••••••••" required disabled={isLoading} />
                <div className="text-right mt-2">
-                <Link href="/forgot-password" className="text-sm text-sky-400 hover:text-sky-300 transition">
-                  Esqueceu sua senha?
-                </Link>
+                <Link href="/forgot-password" className="text-sm text-sky-400 hover:text-sky-300 transition">Esqueceu sua senha?</Link>
               </div>
             </div>
-
-            {error && (
-              <p data-testid="error-message" className="text-center text-red-400 text-sm mb-4">
-                {error}
-              </p>
-            )}
-
-            <button
-              type="submit"
-              className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed"
-              disabled={isLoading}
-            >
-              {isLoading ? 'Entrando...' : 'Entrar'}
-            </button>
+            {error && (<p data-testid="error-message" className="text-center text-red-400 text-sm mb-4">{error}</p>)}
+            <button type="submit" className="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-800 focus:ring-sky-500 disabled:opacity-50 disabled:cursor-not-allowed" disabled={isLoading}>{isLoading ? 'Entrando...' : 'Entrar'}</button>
           </form>
-
-          {/* <div className="text-center mt-6">
-            <p className="text-gray-400">
-              Não tem uma conta?{' '}
-              <Link href="/sign-up" className="font-bold text-sky-400 hover:text-sky-300 transition">
-                Cadastre-se
-              </Link>
-            </p>
-          </div> */}
+          <div className="text-center mt-6">
+            <p className="text-gray-400">Não tem uma conta?{' '}<Link href="/sign-up" className="font-bold text-sky-400 hover:text-sky-300 transition">Cadastre-se</Link></p>
+          </div>
         </div>
       </div>
     </div>
