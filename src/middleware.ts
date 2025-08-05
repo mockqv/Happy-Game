@@ -2,7 +2,7 @@ import { type MiddlewareConfig, type NextRequest, NextResponse } from "next/serv
 
 const publicRoutes = [
     {path: '/sign-in', whenAuthenticated: 'redirect'},
-    {path: '/register', whenAuthenticated: 'redirect'},
+    // {path: '/register', whenAuthenticated: 'redirect'},
     {path: '/noticias', whenAuthenticated: 'next'},
     {path: '/competicoes', whenAuthenticated: 'next'},
     {path: '/jogadores', whenAuthenticated: 'next'},
