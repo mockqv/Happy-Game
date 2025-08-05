@@ -1,9 +1,8 @@
-'use client';
+"use client";
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { ThemeToggle } from './ToggleDarkMode';
-
+import { ThemeToggle } from './ThemeToggle';
 
 const MenuIcon = ({ className }: { className: string }) => (
   <svg className={className} stroke="currentColor" fill="none" strokeWidth="2" viewBox="0 0 24 24" strokeLinecap="round" strokeLinejoin="round" height="1em" width="1em" xmlns="http://www.w3.org/2000/svg"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
@@ -47,10 +46,8 @@ export default function Header() {
       <nav className="container mx-auto flex justify-between items-center p-4">
         <Link href="/" className="text-2xl font-bold text-sky-600 dark:text-sky-400 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">Happy Game</Link>
         
-        {/* NAVEGAÇÃO DESKTOP */}
         <ul className="hidden md:flex items-center space-x-8 text-md font-medium">
           {navItems}
-          {/* Ícone de porta adicionado ao menu de desktop */}
           <li>
             <Link href="/sign-in" aria-label="Entrar" className="text-sky-600 dark:text-sky-400 p-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">
               <DoorIcon className="w-6 h-6" />
@@ -59,9 +56,7 @@ export default function Header() {
           <li><ThemeToggle/></li>
         </ul>
 
-        {/* NAVEGAÇÃO MOBILE */}
         <div className="md:hidden flex items-center space-x-4">
-          {/* Ícone de porta adicionado aos controles mobile */}
           <Link href="/sign-in" aria-label="Entrar" className="text-sky-600 dark:text-sky-400 p-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500">
             <DoorIcon className="w-7 h-7" />
           </Link>
@@ -72,7 +67,6 @@ export default function Header() {
         </div>
       </nav>
 
-      {/* MENU MOBILE EXPANDIDO */}
       {isMenuOpen && (<div data-testid="mobile-menu" className="md:hidden p-4 bg-white dark:bg-slate-900"><ul className="flex flex-col space-y-4 text-center">{navItems}</ul></div>)}
     </header>
   );
