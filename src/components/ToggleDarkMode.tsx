@@ -14,13 +14,13 @@ export default function ToggleDarkMode() {
     return <div className="h-8 w-8" />;
   }
 
-  const isDark = theme === 'dark';
+  const isDark = theme === 'dark' || (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
 
   return (
     <button
-      aria-label="Toggle Dark Mode"
+      aria-label={isDark ? "Ativar modo claro" : "Ativar modo escuro"}
       type="button"
-      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
+      className="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-500 dark:focus-visible:ring-offset-slate-900"
       onClick={() => setTheme(isDark ? 'light' : 'dark')}
     >
       {isDark ? (
