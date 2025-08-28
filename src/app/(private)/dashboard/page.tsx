@@ -2,37 +2,86 @@
 
 import { useAuth } from "@/context/AuthContext"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { FiEye, FiUsers, FiMessageSquare, FiTrendingUp } from "react-icons/fi"
+import { FiEye, FiTrendingUp } from "react-icons/fi"
 import { AcessosSemanaChart } from "@/components/charts/acessos-semana-chart"
 import { CategoriasPieChart } from "@/components/charts/categorias-pie-chart"
 import { useEffect, useState } from "react"
-import { collection, getDocs } from "firebase/firestore"
+
+import { collection, getDocs, Timestamp } from "firebase/firestore"
 import { db } from "database/firebase"
 
-interface DashboardMetrics {
+// Tipos para os dados processados
+type CategoryData = { name: string; value: number };
+type WeeklyData = { day: string; accesses: number };
+interface DashboardMetrics { 
   totalAccess: number;
-
-}
+  engagement: number;
+};
 
 export default function DashboardPage() {
   const { user } = useAuth();
   const [metrics, setMetrics] = useState<DashboardMetrics | null>(null);
+  const [categoryData, setCategoryData] = useState<CategoryData[]>([]);
+  const [weeklyData, setWeeklyData] = useState<WeeklyData[]>([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchDashboardData = async () => {
       setIsLoading(true);
       try {
-        const viewsCollectionRef = collection(db as any, 'views');
+        const viewsCollectionRef = collection(db, 'views');
         const viewsSnapshot = await getDocs(viewsCollectionRef);
+        
         const totalAccess = viewsSnapshot.size;
+        
+        const categoryCounts: { [key: string]: number } = {};
+        const uniqueDocuments = new Set<string>();
 
-        setMetrics({ totalAccess });
+        viewsSnapshot.docs.forEach(doc => {
+            const data = doc.data();
+            if (data.documentType) {
+                categoryCounts[data.documentType] = (categoryCounts[data.documentType] || 0) + 1;
+            }
+            if (data.documentId) {
+                uniqueDocuments.add(data.documentId);
+            }
+        });
+
+        const formattedCategoryData: CategoryData[] = Object.keys(categoryCounts).map(key => ({
+            name: key,
+            value: categoryCounts[key],
+        }));
+
+        const weekDays = ["Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
+        const weeklyCounts: { [key: string]: number } = weekDays.reduce((acc, day) => ({...acc, [day]: 0}), {});
+        
+        const sevenDaysAgo = new Date();
+        sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+
+        viewsSnapshot.docs.forEach(doc => {
+            const viewTimestamp = doc.data().timestamp as Timestamp;
+            if (viewTimestamp) {
+                const viewDate = viewTimestamp.toDate();
+                if (viewDate >= sevenDaysAgo) {
+                    const dayName = weekDays[viewDate.getDay()];
+                    weeklyCounts[dayName]++;
+                }
+            }
+        });
+        const formattedWeeklyData: WeeklyData[] = weekDays.map(day => ({
+            day,
+            accesses: weeklyCounts[day]
+        }));
+
+        const uniqueItemsCount = uniqueDocuments.size;
+        const engagement = uniqueItemsCount > 0 ? totalAccess / uniqueItemsCount : 0;
+
+        setMetrics({ totalAccess, engagement });
+        setCategoryData(formattedCategoryData);
+        setWeeklyData(formattedWeeklyData);
 
       } catch (error) {
         console.error("Erro ao buscar dados do dashboard:", error);
-        // Em caso de erro (ex: no preview), definimos um valor padrão.
-        setMetrics({ totalAccess: 0 });
       } finally {
         setIsLoading(false);
       }
@@ -52,7 +101,7 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total de Acessos</CardTitle>
@@ -60,7 +109,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             {isLoading ? (
-              <div className="text-2xl font-bold animate-pulse bg-gray-700 rounded w-24 h-8"></div>
+              <div className="text-2xl font-bold animate-pulse bg-muted rounded w-24 h-8"></div>
             ) : (
               <>
                 <div className="text-2xl font-bold">{metrics?.totalAccess.toLocaleString('pt-BR') || 0}</div>
@@ -69,44 +118,28 @@ export default function DashboardPage() {
             )}
           </CardContent>
         </Card>
-        {/* Outros cards continuam com dados estáticos por enquanto */}
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Novos Usuários</CardTitle>
-            <FiUsers className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">+1,214</div>
-            <p className="text-xs text-muted-foreground">+12.1% desde o mês passado</p>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Comentários</CardTitle>
-            <FiMessageSquare className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">8,933</div>
-            <p className="text-xs text-muted-foreground">+8.3% desde a semana passada</p>
-          </CardContent>
-        </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Engajamento</CardTitle>
             <FiTrendingUp className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">25.8%</div>
-            <p className="text-xs text-muted-foreground">-0.5% desde ontem</p>
+             {isLoading ? (
+              <div className="text-2xl font-bold animate-pulse bg-muted rounded w-24 h-8"></div>
+            ) : (
+              <>
+                <div className="text-2xl font-bold">{metrics?.engagement.toFixed(1) || 0}</div>
+                <p className="text-xs text-muted-foreground">Média de views por item</p>
+              </>
+            )}
           </CardContent>
         </Card>
       </div>
 
       <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-        {/* Os gráficos precisarão ser adaptados para receber os dados via props */}
-        <AcessosSemanaChart />
-        <CategoriasPieChart />
+        <AcessosSemanaChart data={weeklyData} />
+        <CategoriasPieChart data={categoryData} />
       </div>
     </div>
-  )
+  );
 }

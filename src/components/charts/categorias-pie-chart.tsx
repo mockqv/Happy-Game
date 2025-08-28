@@ -2,21 +2,39 @@
 
 import { Pie, PieChart, ResponsiveContainer, Cell, Tooltip } from "recharts"
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
-import { ChartTooltipContent, ChartTooltip, ChartContainer } from "@/components/ui/chart"
+import { ChartTooltipContent, ChartContainer } from "@/components/ui/chart"
 
-const chartData = [
-  { category: "League of Legends", views: 350, fill: "hsl(var(--primary))" },
-  { category: "Valorant", views: 300, fill: "hsl(var(--primary) / 0.8)" },
-  { category: "CS:GO", views: 200, fill: "hsl(var(--primary) / 0.6)" },
-  { category: "Geral", views: 150, fill: "hsl(var(--primary) / 0.4)" },
-]
+type CategoryData = {
+  name: string;
+  value: number;
+};
 
-export function CategoriasPieChart() {
+interface CategoriasPieChartProps {
+  data: CategoryData[];
+}
+
+const COLORS = [
+  "hsl(var(--primary))",
+  "hsl(var(--primary) / 0.8)",
+  "hsl(var(--primary) / 0.6)",
+  "hsl(var(--primary) / 0.4)",
+];
+
+export function CategoriasPieChart({ data }: CategoriasPieChartProps) {
+  // Prepara os dados para o gráfico, traduzindo as chaves se necessário
+  const chartData = data.map(item => {
+    let translatedName = item.name;
+    if (item.name === 'game') translatedName = 'Jogos';
+    if (item.name === 'player') translatedName = 'Jogadores';
+    if (item.name === 'tournament') translatedName = 'Competições';
+    return { ...item, name: translatedName };
+  });
+
   return (
     <Card>
       <CardHeader>
         <CardTitle>Categorias Populares</CardTitle>
-        <CardDescription>Distribuição de visualizações por categoria de jogo.</CardDescription>
+        <CardDescription>Distribuição de visualizações por tipo de conteúdo.</CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={{}}>
@@ -28,13 +46,13 @@ export function CategoriasPieChart() {
               />
               <Pie
                 data={chartData}
-                dataKey="views"
-                nameKey="category"
+                dataKey="value"
+                nameKey="name"
                 innerRadius={60}
                 strokeWidth={5}
               >
                 {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.fill} />
+                  <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
             </PieChart>
