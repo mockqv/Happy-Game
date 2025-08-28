@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { HashtagIcon, GlobeAltIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { ViewTracker } from '@/components/analytics/ViewTracker';
 
 type Player = {
   id: number;
@@ -60,6 +61,7 @@ export default async function JogadorDetalhePage({ params }: { params: { id: str
           </div>
         </div>
       </section>
+      <ViewTracker documentId={params.id} documentType="player" documentName={player.name} />
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import { notFound } from 'next/navigation';
 import { TrophyIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
+import { ViewTracker } from '@/components/analytics/ViewTracker';
 
 type Tournament = {
   id: number;
@@ -60,6 +61,7 @@ export default async function CompeticaoDetalhePage({ params }: { params: { id: 
           </div>
         </div>
       </section>
+      <ViewTracker documentId={params.id} documentType="tournament" documentName={tournament.name} />
     </div>
   );
 }

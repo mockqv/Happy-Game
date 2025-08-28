@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import { ViewTracker } from '@/components/analytics/ViewTracker';
 
 type Game = {
   id: number;
@@ -55,6 +56,7 @@ export default async function NoticiaDetalhePage({ params }: { params: { id: str
           </div>
         </div>
       </article>
+      <ViewTracker documentId={params.id} documentType="game" documentName={game.name} />
     </div>
   );
 }
