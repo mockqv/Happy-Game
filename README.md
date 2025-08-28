@@ -2,7 +2,7 @@
 
 Bem-vindo ao **Happy Game**, uma aplicação web moderna e responsiva construída com Next.js, TypeScript e Tailwind CSS para ser o hub definitivo para fãs de eSports. Centralizamos notícias, resultados de competições e perfis dos seus jogadores favoritos num só lugar.
 
-[![Tech Stack](https://skillicons.dev/icons?i=nextjs,react,tailwind,typescript,nodejs)](https://skillicons.dev)
+[![Tech Stack](https://skillicons.dev/icons?i=nextjs,react,tailwind,typescript,nodejs,jest)](https://skillicons.dev)
 
 ---
 
@@ -79,9 +79,6 @@ Distribuído sob a Licença MIT. Veja o ficheiro `LICENSE` para mais informaçõ
 
 ---
 
-<p align="center">
-  <b>Feito com ❤️ por</b>
-</p>
 <p align="center">
   <a href="https://github.com/mockqv" title="Perfil do GitHub de mockqv">
     <img 
