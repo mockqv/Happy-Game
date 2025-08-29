@@ -21,12 +21,11 @@ const COLORS = [
 ];
 
 export function CategoriasPieChart({ data }: CategoriasPieChartProps) {
-  // Prepara os dados para o gráfico, traduzindo as chaves se necessário
   const chartData = data.map(item => {
     let translatedName = item.name;
-    if (item.name === 'game') translatedName = 'Jogos';
+    if (item.name === 'game') translatedName = 'Notícias';
     if (item.name === 'player') translatedName = 'Jogadores';
-    if (item.name === 'tournament') translatedName = 'Competições';
+    if (item.name === 'tournament') translatedName = 'Campeonatos';
     return { ...item, name: translatedName };
   });
 
