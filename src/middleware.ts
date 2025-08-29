@@ -8,6 +8,7 @@ const publicRoutes = [
     {path: '/competicoes', whenAuthenticated: 'next'},
     {path: '/jogadores', whenAuthenticated: 'next'},
     {path: '/sobre', whenAuthenticated: 'next'},
+    {path: '/feedback', whenAuthenticated: 'next'},
     //{path: '/example', whenAuthenticated: 'next'} // Example of a route that doesn't redirect,
 ] as const;
 
