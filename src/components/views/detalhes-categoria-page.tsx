@@ -3,9 +3,9 @@
 import { useEffect, useState } from "react";
 import { collection, query, where, getDocs } from "firebase/firestore";
 import { Card } from "@/components/ui/card";
-import { db } from "database/firebase";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
 import { Input } from "../ui/input";
+import { db } from "database/firebase";
 
 type DetalhesCategoriaPageProps = {
   tipo: 'tournament' | 'player' | 'game';

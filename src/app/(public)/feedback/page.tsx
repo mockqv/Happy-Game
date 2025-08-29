@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { db } from "../../../../../database/firebase";
 import { collection, addDoc } from "firebase/firestore";
+import { db } from "database/firebase";
 
 export default function FeedbackPage() {
   const [name, setName] = useState("");
