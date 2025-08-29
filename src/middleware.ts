@@ -1,22 +1,23 @@
 import { type MiddlewareConfig, type NextRequest, NextResponse } from "next/server";
 
 const publicRoutes = [
-    {path: '/', whenAuthenticated: 'next'},
-    {path: '/sign-in', whenAuthenticated: 'redirect'},
+    {path: /^\/$/, whenAuthenticated: 'next'}, // Rota exata da raiz
+    {path: /^\/sign-in$/, whenAuthenticated: 'redirect'},
     // {path: '/register', whenAuthenticated: 'redirect'},
-    {path: '/noticias', whenAuthenticated: 'next'},
-    {path: '/competicoes', whenAuthenticated: 'next'},
-    {path: '/jogadores', whenAuthenticated: 'next'},
-    {path: '/sobre', whenAuthenticated: 'next'},
-    {path: '/feedback', whenAuthenticated: 'next'},
-    //{path: '/example', whenAuthenticated: 'next'} // Example of a route that doesn't redirect,
+    {path: /^\/noticias(\/.*)?$/, whenAuthenticated: 'next'}, // Permite /noticias, /noticias/123, etc.
+    {path: /^\/competicoes(\/.*)?$/, whenAuthenticated: 'next'}, // Permite /competicoes, /competicoes/abc, etc.
+    {path: /^\/jogadores(\/.*)?$/, whenAuthenticated: 'next'}, // Permite /jogadores, /jogadores/xyz, etc.
+    {path: /^\/sobre$/, whenAuthenticated: 'next'},
+    {path: /^\/feedback$/, whenAuthenticated: 'next'},
+    //{path: '/example', whenAuthenticated: 'next'}
 ] as const;
+
 
 const REDIRECT_WHENT_NOT_AUTHENTICATED_ROUTE = '/';
 
 export default function middleware(request: NextRequest){
     const path = request.nextUrl.pathname;
-    const publicRoute = publicRoutes.find(route => route.path === path);
+    const publicRoute = publicRoutes.find(route => route.path.test(path));
     const authToken = request.cookies.get('token');
 
     if(!authToken && publicRoute){
