@@ -2,9 +2,11 @@ import React from 'react';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import loginWithEmailAndPassword from '@/functions/sign-in';
-import SignInPage from './page';
+import SignInPage from '@/app/(public)/sign-in/page';
 
 jest.mock('@/functions/sign-in');
+
+jest.mock('database/firebase');
 
 jest.mock('next/navigation', () => ({
   useRouter: () => ({
@@ -28,7 +30,12 @@ describe('SignInPage', () => {
   });
 
   it('deve chamar a função de login com os dados corretos ao submeter o formulário', async () => {
-    mockedLogin.mockResolvedValue({ user: { uid: '123' } });
+    mockedLogin.mockResolvedValue({
+      user: {
+        uid: '123',
+        getIdToken: async () => 'fake-token',
+      },
+    });
 
     render(<SignInPage />);
 

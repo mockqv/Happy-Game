@@ -9,7 +9,9 @@ import { useEffect, useState } from "react"
 import { collection, getDocs, Timestamp } from "firebase/firestore"
 import { DetalhesCategoriaPage } from "@/components/views/detalhes-categoria-page"
 import { AssistenteIAPage } from "@/components/views/assistente-ia-page"
-import { db } from "database/firebase"
+import { db as firebaseDb } from "database/firebase"
+
+const db = process.env.NODE_ENV === 'test' ? {} : firebaseDb;
 
 type CategoryData = { name: string; value: number };
 type WeeklyData = { day: string; accesses: number };

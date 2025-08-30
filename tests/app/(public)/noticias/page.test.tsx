@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import NoticiasPage from './page';
+import NoticiasPage from '@/app/(public)/noticias/page';
 
 global.fetch = jest.fn();
 

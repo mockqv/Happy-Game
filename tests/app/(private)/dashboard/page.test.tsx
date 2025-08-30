@@ -1,8 +1,20 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import DashboardPage from './page';
+import DashboardPage from '@/app/(private)/dashboard/page';
 
+
+jest.mock('firebase/firestore', () => ({
+  collection: jest.fn(),
+  getDocs: jest.fn(() => Promise.resolve({
+    size: 100,
+    docs: [
+      { data: () => ({ documentType: 'game', documentId: '1', timestamp: { toDate: () => new Date() } }) },
+      { data: () => ({ documentType: 'player', documentId: '2', timestamp: { toDate: () => new Date() } }) },
+      { data: () => ({ documentType: 'tournament', documentId: '3', timestamp: { toDate: () => new Date() } }) },
+    ],
+  })),
+}));
 
 jest.mock('@/context/AuthContext', () => ({
   useAuth: () => ({
@@ -19,6 +31,14 @@ jest.mock('@/components/charts/acessos-semana-chart', () => ({
 
 jest.mock('@/components/charts/categorias-pie-chart', () => ({
   CategoriasPieChart: () => <div data-testid="categorias-chart-mock">Gráfico de Categorias</div>,
+}));
+
+jest.mock('@/components/views/detalhes-categoria-page', () => ({
+  DetalhesCategoriaPage: () => <div data-testid="detalhes-categoria-mock">Detalhes Categoria</div>,
+}));
+
+jest.mock('@/components/views/assistente-ia-page', () => ({
+  AssistenteIAPage: () => <div data-testid="assistente-ia-mock">Assistente IA</div>,
 }));
 
 
