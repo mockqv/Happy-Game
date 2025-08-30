@@ -2,14 +2,12 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import Header from './Header';
+import Header from '@/components/Header';
 
 // Mock do componente ToggleDarkMode para evitar erros relacionados a 'next-themes' no teste
-jest.mock('./ToggleDarkMode', () => {
-  return function DummyToggleDarkMode() {
-    return <div data-testid="toggle-dark-mode-mock"></div>;
-  };
-});
+jest.mock('@/components/ThemeToggle', () => ({
+  ThemeToggle: () => <div data-testid="toggle-dark-mode-mock"></div>,
+}));
 
 // Mock do componente Link do Next.js
 jest.mock('next/link', () => {

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import Footer from './Footer';
+import Footer from '@/components/Footer';
 
 describe('Componente Footer', () => {
   it('deve renderizar o texto de copyright corretamente', () => {
